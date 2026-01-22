@@ -1,0 +1,590 @@
+/* ===================== RESET / FULL-BLEED ===================== */
+*{ box-sizing:border-box; }
+html,body{ margin:0; padding:0; }
+img{ display:block; max-width:100%; height:auto; }
+html{ scroll-behavior:smooth; }
+
+/* ===================== VARIABLES ===================== */
+:root{
+  /* ----- HERO NAV (icons) ----- */
+  --icon-size: clamp(260px, 4.8vw, 320px);
+  --icon-gap:  clamp(30px, 3.2vw, 80px);
+
+  /* icon 群在 hero 背景圖上的位置（百分比：相對 hero 圖高度） */
+  --nav-top: 12.2%;
+  --nav-shift-y: 30%;
+
+  /* ----- HERO CHAR (02/03) ----- */
+  --left-w: 17%;
+  --left-top: 55%;
+  --left-left: 0%;
+
+  --right-w: 32%;
+  --right-top: 12%;
+  --right-right: 0%;
+
+}
+
+/* ===================== FULL BLEED SECTIONS ===================== */
+.hero, .profile-section, .contact-section{ width:100vw; }
+
+/* ===================== STAGE ===================== */
+.stage{
+  position:relative;
+  width:100vw;
+  overflow:hidden;
+}
+
+.bg{ width:100%; height:auto; }
+
+/* ===================== HERO ===================== */
+.stage-hero{ background:#c43a2c; }
+
+.hero-nav{
+  position:absolute;
+  left:50%;
+  top:16.5%;
+  transform: translateX(-50%);
+  z-index:20;
+  display: flex;
+  justify-content: center; /* 水平居中 */
+  align-items: flex-end;   /* 讓按鈕底部對齊（通常選單底部對齊較美觀） */
+  gap: 6.2vw;
+}
+
+.nav-link{
+  display: flex;
+  flex-direction: column;
+  align-items: center;    /* 讓內容在容器內置中 */
+  justify-content: center;
+  width: 3.8vw;           /* 強制給予固定的寬度 */
+  height: auto;
+}
+
+.nav-link img{
+  width:100%;
+  height:auto;
+  transition:transform 160ms ease;
+}
+.nav-link:hover img{ transform:translateY(-2px) scale(1.02); }
+
+/* 02/03 */
+.char{
+  position:absolute;
+  z-index:10;
+  opacity:0;
+}
+.char-left{
+  width:var(--left-w);
+  left:var(--left-left);
+  top:var(--left-top);
+  animation:charInLeft 900ms ease forwards;
+}
+.char-right{
+  width:var(--right-w);
+  right:var(--right-right);
+  top:var(--right-top);
+  animation:charInRight 900ms ease forwards;
+}
+@keyframes charInLeft{
+  from{ transform:translateX(-28px); opacity:0; }
+  to{ transform:translateX(0); opacity:1; }
+}
+@keyframes charInRight{
+  from{ transform:translateX(28px); opacity:0; }
+  to{ transform:translateX(0); opacity:1; }
+}
+
+/* ===================== PROFILE ===================== */
+.profile-section{ background:#FFC4BC; }
+.profile-img{ width:100%; height:auto; }
+
+/* ===================== CONTACT ===================== */
+
+.stage-contact{
+  position: relative;
+  width: 100vw;
+  overflow: hidden;
+}
+
+/* 背景圖 */
+.bg-contact{
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ✅ 跟設計稿一樣比例的定位層 */
+.contact-overlay{
+  position: absolute;
+  inset: 0;
+  aspect-ratio: 1280 / 2700; /* ← 你 Figma 的 frame */
+  pointer-events: none;
+}
+
+/* ===================== SOCIAL ICONS（不會跑） ===================== */
+
+.social-icons{
+  position: absolute;
+
+  /* ✅ 這兩個數字只要對一次 Figma 就好 */
+  left: 85.5%;    /* 向右 → 數字變大 */
+  top: 13%;     /* 向下 → 數字變大 */
+
+  transform: translate(-50%, -50%);
+
+  display: flex;
+  flex-direction: column;
+  gap: clamp(18px, 1.6vw, 24px);
+
+  pointer-events: auto;
+
+  opacity: 0;
+  animation: socialFade 520ms ease forwards;
+  animation-delay: 300ms;
+}
+
+@keyframes socialFade{
+  from{ opacity:0; }
+  to{ opacity:1; }
+}
+
+.social-link img{
+  width: clamp(170px, 3.8vw, 250px);
+  height: auto;
+  transition: transform .16s ease;
+}
+
+.social-link:hover img{
+  transform: scale(1.06);
+}
+
+/* ===================== BACK TO TOP ===================== */
+
+.back-to-top{
+  position: absolute;
+  right: 1.4%;
+  bottom: 2.2%;
+  z-index: 30;
+  width: clamp(200px, 6vw, 280px);
+}
+
+.back-to-top img{
+  width: 100%;
+  height: auto;
+}
+
+
+
+
+
+
+
+/* =========================
+   Graphic 區塊設定
+   ========================= */
+/* 畫布 */
+.graphic{
+  position: relative;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* 背景 */
+.graphic-bg{
+  width: 100%;
+  height: auto;
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+
+/* ✅ 蘋果：位置用 %，尺寸也用 %（同一基準） */
+.apple{
+  position: absolute;
+  left: 8%;
+  top: 82.8%;
+  z-index: 10;
+  display: block;
+  width: 33.73%;  
+}
+
+/* ✅ 圖片跟著 apple 這個盒子走，不要再用 78% */
+.apple img{
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.apple:hover{
+  transform: translateY(-2px) scale(1.03);
+}
+
+
+
+
+
+/* =========================
+   Illustration 區塊設定
+   ========================= */
+
+/* 整張 Illustration 畫布 */
+/* 畫布 */
+.Illustration{
+  position: relative;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* 背景圖 */
+.illustration-bg{
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* 星星連結（可移動） */
+.star{
+  position: absolute;
+  left: 10%;
+  top: 82%;
+  width: 30%;
+  z-index: 10;
+  display: block;
+}
+
+/* 星星尺寸 */
+.star img{
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.star:hover{
+  transform:translateY(-2px) scale(1.03);
+}
+
+
+
+
+
+/* =========================
+   Theatre 區塊設定
+   ========================= */
+   /* 整張 Theatre 畫布 */
+/* 畫布 */
+.theatre{
+  position: relative;
+  max width: 100%;
+  margin: 0 auto;
+}
+
+.theatre-bg{
+  width: 100%;
+  height: auto;
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+
+.c1-1{
+  position: absolute;
+  left: 3.6%;
+  top: 23%;
+  width: 43%;    
+  display: block;
+  z-index: 2;
+}
+
+.c1-1 img{
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.c1-1:hover{
+  transform:translateY(-2px) scale(1.03);
+}
+
+
+.c1-2{
+  position: absolute;
+  left: 3.6%;
+  top: 41.8%;
+  width: 43%;   
+  z-index: 10;
+  display: block;
+}
+
+.c1-2 img{
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.c1-2:hover{
+  transform:translateY(-2px) scale(1.03);
+}
+
+
+.y1-1{
+  position: absolute;
+  left: 55%;
+  top: 62.5%;
+  width: 43%;   
+  z-index: 10;
+  display: block;
+}
+
+.y1-1 img{
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.y1-1:hover{
+  transform:translateY(-2px) scale(1.03);
+}
+
+.y1-2{
+  position: absolute;
+  left: 55%;
+  top: 70.5%;
+  width: 43%;   
+  z-index: 10;
+  display: block;
+}
+
+.y1-2 img{
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.y1-2:hover{
+  transform:translateY(-2px) scale(1.03);
+}
+
+.b1-1{
+  position: absolute;
+  left: 58.3%;
+  top: 82%;
+  width: 36%;   
+  z-index: 10;
+  display: block;
+}
+
+.b1-1 img{
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.b1-1:hover{
+  transform:translateY(-2px) scale(1.03);
+}
+
+.b1-2{
+  position: absolute;
+  left: 55.7%;
+  top: 92%;
+  width: 41%;   
+  z-index: 10;
+  display: block;
+}
+
+.b1-2 img{
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.b1-2:hover:hover{
+  transform:translateY(-2px) scale(1.03);
+}
+
+
+
+
+
+/* =========================
+   Articles 區塊設定
+   ========================= */
+   /* 整張 Articles 畫布 */
+/* =========================
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background-color: #f9f9f9;
+}
+
+.articles-container {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 修正背景：維持 100% 寬度，並確保隨內容增長而佔滿空間 */
+.articles-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; 
+    height: auto;
+    min-height: 100%; /* 這行確保背景不會縮小 */
+    object-fit: cover;
+    z-index: -1;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+/* =========================
+   切換顯示邏輯
+   ========================= */
+
+/* 1. 預設隱藏所有卡片 */
+.article-card {
+    display: none; 
+}
+
+/* 2. 只有選中的分類會顯示為 flex */
+#tab1:checked ~ .articles-grid .chihou,
+#tab2:checked ~ .articles-grid .art,
+#tab3:checked ~ .articles-grid .kougei,
+#tab4:checked ~ .articles-grid .life {
+    display: flex; 
+}
+
+/* =========================
+   導覽選單
+   ========================= */
+.nav-menu {
+    position: absolute;
+    top: 70vw; 
+    display: flex;
+    gap: 2.4vw;
+    z-index: 10;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.nav-menu label {
+    padding: 0.8vw 2vw; 
+    border-radius: 200px;
+    cursor: pointer;
+    font-family: "Hiragino Maru Gothic ProN", sans-serif;
+    color: white;
+    -webkit-text-stroke: 0.15vw #CE331F; 
+    font-size: 2.6vw;
+    transition: 0.3s;
+}
+
+.nav-menu label[for="tab1"] { background-color: #ECD8ED; }
+.nav-menu label[for="tab2"] { background-color: #BFDDCA; }
+.nav-menu label[for="tab3"] { background-color: #CDDCDC; }
+.nav-menu label[for="tab4"] { background-color: #FFE2E2; }
+
+#tab1:checked ~ .nav-menu label[for="tab1"],
+#tab2:checked ~ .nav-menu label[for="tab2"],
+#tab3:checked ~ .nav-menu label[for="tab3"],
+#tab4:checked ~ .nav-menu label[for="tab4"]
+ {
+    transform: scale(1.1);
+    filter: brightness(1.05);
+}
+
+/* =========================
+   文章網格 (維持原數值)
+   ========================= */
+.articles-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 200px 400px; 
+    width: 100%;
+    max-width: 3200px; 
+    margin: 0 auto;
+    z-index: 10;
+    padding-top: 85vw; 
+    padding-bottom: 200px;
+}
+
+/* =========================
+   卡片內容
+   ========================= */
+.article-card {
+    background-color: #ECD8ED;
+    border-radius: 100px;
+    padding: 5%;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+/* 針對分類變換卡片底色 */
+.article-card.art { background-color: #BFDDCA; }
+.article-card.kougei { background-color: #CDDCDC; }
+.article-card.life { background-color: #FFE2E2; }
+
+.article-card img {
+    width: 100%;
+    height: auto; 
+    object-fit: cover;
+    border-radius: 30px;
+    margin-bottom: 2rem; 
+    z-index: 1;
+    padding: 5%;
+}
+
+.article-title {
+    background-color: #fff;
+    font-size: clamp(2.6rem, 3vw, 3.5rem); 
+    font-weight: bold;
+    color: #000;
+    padding: 50px 30px;
+    border-radius: 40px;
+    line-height: 1.2;
+    z-index: 10;
+    width: 83%; 
+    min-height: auto; 
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    text-align: center;   
+    margin: 0 auto 1rem auto;
+    font-family: "Hiragino Maru Gothic ProN", sans-serif;
+}
+
+.article-meta {
+    font-size: clamp(1.5rem, 2vw, 2.5rem);
+    color: #000;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    text-align: center;
+    width: 100%;
+    font-family: "Hiragino Maru Gothic ProN", sans-serif;
+}
+
+.continue-btn {
+    display: table; 
+    margin: 50px auto 0 auto; 
+    background-color: #fff;
+    color: #000;
+    text-decoration: none;
+    font-size: 1.9rem;
+    padding: 15px 60px;
+    border-radius: 30px;
+    transition: 0.3s ease;
+    font-family: "Hiragino Maru Gothic ProN", sans-serif;
+    text-align: center;
+}
+
+.continue-btn:hover {
+    background-color: #FFEDB3;
+    transform: scale(1.1);
+}
